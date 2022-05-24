@@ -95,9 +95,10 @@ export class HTMLElementSandbox extends LitElement {
         const elemId = el.getAttribute("data-knob-text") || "";
         const knob = this.querySelector(`#${elemId}`);
         if (knob && knob instanceof KnobValue) {
-          knob.onValue = (val) => {
+          knob.addEventListener("value", () => {
+            const val = knob.value;
             el.textContent = val;
-          };
+          });
           el.addEventListener("input", (e) => {
             const target = e.target as HTMLElement;
             knob.value = target.textContent;
@@ -105,12 +106,12 @@ export class HTMLElementSandbox extends LitElement {
           knob.init();
         }
       });
-      // CSS Knobs [data-knob-css-*]
       div.querySelectorAll("*").forEach((el) => {
         const attrs = el.attributes;
         for (let i = 0; i < attrs.length; i++) {
           const attr = attrs[i];
           const attrName = attr.name;
+          // CSS Knobs
           if (attrName.startsWith("data-knob-css-")) {
             const cssKey = attrName.replace("data-knob-css-", "");
             const knob = this.querySelector(`#${attr.value}`);
@@ -119,7 +120,8 @@ export class HTMLElementSandbox extends LitElement {
               knob instanceof KnobValue &&
               el instanceof HTMLElement
             ) {
-              knob.onValue = (val) => {
+              knob.addEventListener("value", () => {
+                const val = knob.value;
                 if (knob.hasAttribute("suffix")) {
                   el.style.setProperty(
                     cssKey,
@@ -128,17 +130,19 @@ export class HTMLElementSandbox extends LitElement {
                 } else {
                   el.style.setProperty(cssKey, val);
                 }
-              };
+              });
               knob.init();
             }
           }
+          // Attribute Knobs
           if (attrName.startsWith("data-knob-attr-")) {
             const attrKey = attrName.replace("data-knob-attr-", "");
             const knob = this.querySelector(`#${attr.value}`);
             if (knob && knob instanceof KnobValue) {
-              knob.onValue = (val) => {
+              knob.addEventListener("value", () => {
+                const val = knob.value;
                 el.setAttribute(attrKey, val);
-              };
+              });
               knob.init();
             }
           }

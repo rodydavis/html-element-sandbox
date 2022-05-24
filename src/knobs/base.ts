@@ -50,6 +50,7 @@ export abstract class KnobValue<T> extends Knob {
         composed: true,
       })
     );
+    this.requestUpdate();
   }
 
   render() {
@@ -64,8 +65,7 @@ export abstract class KnobValue<T> extends Knob {
   onValue(_val: T) {}
 
   init() {
-    this.onValue(this.value);
-    this.requestUpdate();
+    this.notify();
   }
 
   resolveValue(val: T) {
