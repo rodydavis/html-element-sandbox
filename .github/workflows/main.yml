@@ -1,0 +1,30 @@
+name: Demo
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+          
+      - name: Install dependencies
+        run: npm i
+        
+      - name: Build
+        run: |
+          npm run build
+          touch ./dist/.nojekyll
+
+      - name: Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
