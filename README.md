@@ -60,4 +60,5 @@
     </knob-group>
   </div>
 </html-element-sandbox>
+<script type="module" src="https://rodydavis.github.io/html-element-sandbox/html-element-sandbox.es.js"></script>
 ```
