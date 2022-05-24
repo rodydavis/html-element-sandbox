@@ -17,7 +17,8 @@ export class ColorKnob extends StringKnob {
   resolveValue(value: string) {
     if (value && value.startsWith("--")) {
       const style = getComputedStyle(document.body);
-      return style.getPropertyValue(value);
+      const resolved = style.getPropertyValue(value);
+      return resolved;
     }
     return value;
   }

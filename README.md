@@ -1,5 +1,7 @@
 # HTML Element Sandbox
 
+![](screenshots/preview.png)
+
 ```html
 <html-element-sandbox>
   <template>

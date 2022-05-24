@@ -13,12 +13,13 @@ export class HTMLElementSandbox extends LitElement {
   static styles = css`
     main {
       --knobs-width: 300px;
+      --code-height: calc(100% * 0.4);
       display: grid;
       grid-template-areas:
         "preview knobs"
         "code knobs";
       grid-template-columns: calc(100% - var(--knobs-width)) var(--knobs-width);
-      grid-template-rows: 50% 50%;
+      grid-template-rows: calc(100% - var(--code-height)) var(--code-height);
       height: 100%;
       width: 100%;
     }
@@ -30,9 +31,11 @@ export class HTMLElementSandbox extends LitElement {
       display: flex;
       flex-direction: column;
       border-left: 1px solid #000;
+      overflow-y: auto;
     }
     slot[name="code"] {
       grid-area: code;
+      overflow-y: auto;
     }
     pre {
       margin: 0;
@@ -44,7 +47,6 @@ export class HTMLElementSandbox extends LitElement {
     code {
       font-size: 0.8rem;
       white-space: pre-wrap;
-      overflow: auto;
     }
     #preview {
       grid-area: preview;
