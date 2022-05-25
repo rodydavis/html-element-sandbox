@@ -1000,7 +1000,7 @@ let HTMLElementSandbox = class extends s {
     </main>`;
   }
   firstUpdated() {
-    document.addEventListener("DOMContentLoaded", () => this.init());
+    this.init();
   }
   init() {
     this.setUpKnobs();
