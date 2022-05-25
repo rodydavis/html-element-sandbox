@@ -16,7 +16,6 @@
     "build": "tsc && vite build"
   },
   "dependencies": {
-    "@material/mwc-button": "^0.26.1",
     "lit": "^2.0.2"
   },
   "devDependencies": {
