@@ -14,14 +14,38 @@ export class HTMLElementSandbox extends LitElement {
     main {
       --knobs-width: 300px;
       --code-height: calc(100% * 0.4);
+      --mobile-height: 350px;
       display: grid;
-      grid-template-areas:
-        "preview knobs"
-        "code knobs";
-      grid-template-columns: calc(100% - var(--knobs-width)) var(--knobs-width);
-      grid-template-rows: calc(100% - var(--code-height)) var(--code-height);
+      grid-template-areas: "preview" "knobs" "code";
+      grid-template-columns: 100%;
+      grid-template-rows: var(--mobile-height) var(--mobile-height) var(
+          --mobile-height
+        );
       height: 100%;
       width: 100%;
+    }
+    #preview {
+      grid-area: preview;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #272727;
+      background-color: whitesmoke;
+    }
+    @media (min-width: 600px) {
+      main {
+        grid-template-areas:
+          "preview knobs"
+          "code knobs";
+        grid-template-columns: calc(100% - var(--knobs-width)) var(
+            --knobs-width
+          );
+        grid-template-rows: calc(100% - var(--code-height)) var(--code-height);
+      }
+      #preview {
+        border-bottom: none;
+      }
     }
     section {
       flex: 1;
@@ -47,13 +71,6 @@ export class HTMLElementSandbox extends LitElement {
     code {
       font-size: 0.8rem;
       white-space: pre-wrap;
-    }
-    #preview {
-      grid-area: preview;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
   `;
 
@@ -91,8 +108,8 @@ export class HTMLElementSandbox extends LitElement {
       const div = document.createElement("div");
       div.appendChild(template.content.cloneNode(true));
       // Text Knobs
-      div.querySelectorAll("[data-knob-text]").forEach((el) => {
-        const elemId = el.getAttribute("data-knob-text") || "";
+      div.querySelectorAll("[knob-text]").forEach((el) => {
+        const elemId = el.getAttribute("knob-text") || "";
         const knob = this.querySelector(`#${elemId}`);
         if (knob && knob instanceof KnobValue) {
           knob.addEventListener("value", () => {
@@ -112,8 +129,8 @@ export class HTMLElementSandbox extends LitElement {
           const attr = attrs[i];
           const attrName = attr.name;
           // CSS Knobs
-          if (attrName.startsWith("data-knob-css-")) {
-            const cssKey = attrName.replace("data-knob-css-", "");
+          if (attrName.startsWith("knob-css-")) {
+            const cssKey = attrName.replace("knob-css-", "");
             const knob = this.querySelector(`#${attr.value}`);
             if (
               knob &&
@@ -135,8 +152,8 @@ export class HTMLElementSandbox extends LitElement {
             }
           }
           // Attribute Knobs
-          if (attrName.startsWith("data-knob-attr-")) {
-            const attrKey = attrName.replace("data-knob-attr-", "");
+          if (attrName.startsWith("knob-attr-")) {
+            const attrKey = attrName.replace("knob-attr-", "");
             const knob = this.querySelector(`#${attr.value}`);
             if (knob && knob instanceof KnobValue) {
               knob.addEventListener("value", () => {
@@ -170,7 +187,7 @@ export class HTMLElementSandbox extends LitElement {
     const attrs = node.attributes;
     for (let i = 0; i < attrs.length; i++) {
       const attr = attrs[i];
-      if (attr.name.startsWith("data-knob-")) continue;
+      if (attr.name.startsWith("knob-")) continue;
       sb.push(` ${attr.name}="${attr.value}"`);
     }
     sb.push(">");
