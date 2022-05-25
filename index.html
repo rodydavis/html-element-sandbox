@@ -20,23 +20,34 @@
     </style>
   </head>
   <body>
-    <html-element-sandbox>
+    <html-element-sandbox manifest="custom-elements.json">
       <template>
-        <button
-          class="button"
-          knob-text="label"
-          knob-css-color="fg-color"
-          knob-css-background-color="bg-color"
-          knob-css-border-radius="shape"
-          knob-css-font-size="text-font-size"
-          knob-css-padding="padding"
-          knob-css---shadow-color="shadow"
-          knob-attr-contenteditable="content-editable"
-        >
-          My Button
-        </button>
+        <div id="buttons">
+          <button
+            knob-text="label"
+            knob-css-color="fg-color"
+            knob-css-background-color="bg-color"
+            knob-css-border-radius="shape"
+            knob-css-font-size="text-font-size"
+            knob-css-padding="padding"
+            knob-css---shadow-color="shadow"
+            knob-attr-raised="raised"
+            knob-attr-contenteditable="contenteditable"
+          ></button>
+          <mwc-button
+            knob-attr-label="label"
+            knob-css---mdc-theme-on-primary="fg-color"
+            knob-css---mdc-theme-primary="bg-color"
+            knob-css---mdc-shape-small="shape"
+            knob-attr-raised="raised"
+            label="My Button"
+          ></mwc-button>
+        </div>
+        <script type="module">
+          import "@material/mwc-button";
+        </script>
         <style>
-          .button {
+          button {
             --shadow-color: #000;
             --elevation: 3px;
             display: block;
@@ -47,6 +58,16 @@
             cursor: pointer;
             box-shadow: 0 var(--elevation) calc(var(--elevation) * 2) 0
               var(--shadow-color);
+          }
+          mwc-button {
+            --mdc-theme-on-primary: #000;
+            --mdc-theme-primary: #fff;
+            --mdc-shape-small: none;
+          }
+          #buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
           }
         </style>
       </template>
@@ -77,7 +98,7 @@
           <knob-number
             id="shape"
             name="Border Radius"
-            value="100"
+            value="30"
             suffix="px"
           ></knob-number>
           <knob-number
@@ -88,11 +109,11 @@
           ></knob-number>
         </knob-group>
         <knob-group name="Attributes" expanded>
-          <knob-boolean
-            id="content-editable"
-            name="Content Editable"
-            value="false"
-          ></knob-boolean>
+          <knob-boolean id="raised" name="Raised" value="false"></knob-boolean>
+          <knob-list id="contenteditable" name="Content Editable" value="false">
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </knob-list>
         </knob-group>
       </div>
     </html-element-sandbox>

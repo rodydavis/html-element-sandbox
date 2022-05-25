@@ -5,8 +5,10 @@ import "./knobs/boolean";
 import "./knobs/string";
 import "./knobs/number";
 import "./knobs/color";
+import "./knobs/list";
 import "./knobs/group";
 import { KnobValue } from "./knobs/base";
+import { BooleanKnob } from "./knobs/boolean";
 
 @customElement("html-element-sandbox")
 export class HTMLElementSandbox extends LitElement {
@@ -59,7 +61,6 @@ export class HTMLElementSandbox extends LitElement {
     }
     slot[name="code"] {
       grid-area: code;
-      overflow-y: auto;
     }
     pre {
       margin: 0;
@@ -67,6 +68,7 @@ export class HTMLElementSandbox extends LitElement {
       padding: 16px;
       background-color: #272727;
       color: #c8c8c8;
+      overflow-y: scroll;
     }
     code {
       font-size: 0.8rem;
@@ -158,7 +160,15 @@ export class HTMLElementSandbox extends LitElement {
             if (knob && knob instanceof KnobValue) {
               knob.addEventListener("value", () => {
                 const val = knob.value;
-                el.setAttribute(attrKey, val);
+                if (knob instanceof BooleanKnob) {
+                  if (val) {
+                    el.setAttribute(attrKey, "");
+                  } else {
+                    el.removeAttribute(attrKey);
+                  }
+                } else {
+                  el.setAttribute(attrKey, val);
+                }
               });
               knob.init();
             }
@@ -175,7 +185,11 @@ export class HTMLElementSandbox extends LitElement {
     if (preview.children.length > 0) {
       const child = preview.children[1];
       if (child && child.children.length > 0) {
-        return this.elementToString(child.children[0]);
+        const lines = this.elementToString(child.children[0]);
+        // Trim empty lines
+        const linesArray = lines.split("\n");
+        const filteredLines = linesArray.filter((line) => line.trim() !== "");
+        return filteredLines.join("\n");
       }
     }
     return "";
