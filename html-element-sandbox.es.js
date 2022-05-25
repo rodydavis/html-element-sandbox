@@ -1096,7 +1096,11 @@ let HTMLElementSandbox = class extends s {
       const attr = attrs[i2];
       if (attr.name.startsWith("knob-"))
         continue;
-      sb.push(` ${attr.name}="${attr.value}"`);
+      if (attr.value === "") {
+        sb.push(` ${attr.name}`);
+      } else {
+        sb.push(` ${attr.name}="${attr.value}"`);
+      }
     }
     sb.push(">");
     if (node.childNodes.length > 0) {
