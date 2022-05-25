@@ -95,8 +95,7 @@ export class HTMLElementSandbox extends LitElement {
   }
 
   firstUpdated() {
-    // Wait for the DOM to be ready before initializing the knobs
-    document.addEventListener("DOMContentLoaded", () => this.init());
+    this.init();
   }
 
   init() {
