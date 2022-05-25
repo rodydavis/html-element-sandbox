@@ -738,7 +738,7 @@ var __decorateClass$6 = (decorators, target, key, kind) => {
     __defProp$6(target, key, result);
   return result;
 };
-const tagName$5 = "knob-boolean";
+const tagName$6 = "knob-boolean";
 let BooleanKnob = class extends KnobValue {
   constructor(name, val) {
     super(name, val);
@@ -764,7 +764,7 @@ __decorateClass$6([
   })
 ], BooleanKnob.prototype, "_value", 2);
 BooleanKnob = __decorateClass$6([
-  n$1(tagName$5)
+  n$1(tagName$6)
 ], BooleanKnob);
 var __defProp$5 = Object.defineProperty;
 var __getOwnPropDesc$5 = Object.getOwnPropertyDescriptor;
@@ -777,7 +777,7 @@ var __decorateClass$5 = (decorators, target, key, kind) => {
     __defProp$5(target, key, result);
   return result;
 };
-const tagName$4 = "knob-string";
+const tagName$5 = "knob-string";
 let StringKnob = class extends KnobValue {
   constructor(name, val) {
     super(name, val);
@@ -800,7 +800,7 @@ __decorateClass$5([
   e({ type: String, attribute: "value" })
 ], StringKnob.prototype, "_value", 2);
 StringKnob = __decorateClass$5([
-  n$1(tagName$4)
+  n$1(tagName$5)
 ], StringKnob);
 var __defProp$4 = Object.defineProperty;
 var __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor;
@@ -813,7 +813,7 @@ var __decorateClass$4 = (decorators, target, key, kind) => {
     __defProp$4(target, key, result);
   return result;
 };
-const tagName$3 = "knob-number";
+const tagName$4 = "knob-number";
 let NumberKnob = class extends KnobValue {
   constructor(name, val) {
     super(name, val);
@@ -846,7 +846,7 @@ __decorateClass$4([
   })
 ], NumberKnob.prototype, "_value", 2);
 NumberKnob = __decorateClass$4([
-  n$1(tagName$3)
+  n$1(tagName$4)
 ], NumberKnob);
 var __defProp$3 = Object.defineProperty;
 var __getOwnPropDesc$3 = Object.getOwnPropertyDescriptor;
@@ -859,7 +859,7 @@ var __decorateClass$3 = (decorators, target, key, kind) => {
     __defProp$3(target, key, result);
   return result;
 };
-const tagName$2 = "knob-color";
+const tagName$3 = "knob-color";
 let ColorKnob = class extends StringKnob {
   buildInput() {
     return $`<input
@@ -878,7 +878,7 @@ let ColorKnob = class extends StringKnob {
   }
 };
 ColorKnob = __decorateClass$3([
-  n$1(tagName$2)
+  n$1(tagName$3)
 ], ColorKnob);
 var __defProp$2 = Object.defineProperty;
 var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
@@ -891,7 +891,7 @@ var __decorateClass$2 = (decorators, target, key, kind) => {
     __defProp$2(target, key, result);
   return result;
 };
-const tagName$1 = "knob-list";
+const tagName$2 = "knob-list";
 let ListKnob = class extends KnobValue {
   constructor(name, val) {
     super(name, val);
@@ -925,7 +925,7 @@ __decorateClass$2([
   })
 ], ListKnob.prototype, "_value", 2);
 ListKnob = __decorateClass$2([
-  n$1(tagName$1)
+  n$1(tagName$2)
 ], ListKnob);
 var __defProp$1 = Object.defineProperty;
 var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
@@ -938,7 +938,7 @@ var __decorateClass$1 = (decorators, target, key, kind) => {
     __defProp$1(target, key, result);
   return result;
 };
-const tagName = "knob-group";
+const tagName$1 = "knob-group";
 let GroupKnob = class extends Knob {
   constructor(name, knobs = []) {
     super(name);
@@ -969,7 +969,7 @@ __decorateClass$1([
   e({ type: Boolean })
 ], GroupKnob.prototype, "expanded", 2);
 GroupKnob = __decorateClass$1([
-  n$1(tagName)
+  n$1(tagName$1)
 ], GroupKnob);
 var __defProp2 = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -982,6 +982,7 @@ var __decorateClass = (decorators, target, key, kind) => {
     __defProp2(target, key, result);
   return result;
 };
+const tagName = "html-element-sandbox";
 let HTMLElementSandbox = class extends s {
   constructor() {
     super(...arguments);
@@ -1090,7 +1091,8 @@ let HTMLElementSandbox = class extends s {
   }
   elementToString(node) {
     const sb = [];
-    sb.push(`<${node.tagName.toLowerCase()}`);
+    const tag = node.tagName.toLowerCase();
+    sb.push(`<${tag}`);
     const attrs = node.attributes;
     for (let i2 = 0; i2 < attrs.length; i2++) {
       const attr = attrs[i2];
@@ -1113,7 +1115,7 @@ let HTMLElementSandbox = class extends s {
         }
       }
     }
-    sb.push(`</${node.tagName.toLowerCase()}>`);
+    sb.push(`</${tag}>`);
     return sb.join("\n");
   }
 };
@@ -1186,5 +1188,5 @@ __decorateClass([
   t()
 ], HTMLElementSandbox.prototype, "code", 2);
 HTMLElementSandbox = __decorateClass([
-  n$1("html-element-sandbox")
+  n$1(tagName)
 ], HTMLElementSandbox);
