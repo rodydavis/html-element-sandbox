@@ -10,7 +10,9 @@ import "./knobs/group";
 import { KnobValue } from "./knobs/base";
 import { BooleanKnob } from "./knobs/boolean";
 
-@customElement("html-element-sandbox")
+export const tagName = "html-element-sandbox";
+
+@customElement(tagName)
 export class HTMLElementSandbox extends LitElement {
   static styles = css`
     main {
@@ -93,12 +95,14 @@ export class HTMLElementSandbox extends LitElement {
   }
 
   firstUpdated() {
+    // Wait for the DOM to be ready before initializing the knobs
     document.addEventListener("DOMContentLoaded", () => this.init());
   }
 
   init() {
     this.setUpKnobs();
     this.code = this.getCode();
+    // Update the code every time a knob value changes
     this.addEventListener("value", () => {
       this.code = this.getCode();
     });
@@ -111,7 +115,7 @@ export class HTMLElementSandbox extends LitElement {
     if (template) {
       const div = document.createElement("div");
       div.appendChild(template.content.cloneNode(true));
-      // Text Knobs
+      // Text Knobs (knob-text)
       div.querySelectorAll("[knob-text]").forEach((el) => {
         const elemId = el.getAttribute("knob-text") || "";
         const knob = this.querySelector(`#${elemId}`);
@@ -132,7 +136,7 @@ export class HTMLElementSandbox extends LitElement {
         for (let i = 0; i < attrs.length; i++) {
           const attr = attrs[i];
           const attrName = attr.name;
-          // CSS Knobs
+          // CSS Knobs (knob-css-*)
           if (attrName.startsWith("knob-css-")) {
             const cssKey = attrName.replace("knob-css-", "");
             const knob = this.querySelector(`#${attr.value}`);
@@ -144,18 +148,20 @@ export class HTMLElementSandbox extends LitElement {
               knob.addEventListener("value", () => {
                 const val = knob.value;
                 if (knob.hasAttribute("suffix")) {
+                  // Add suffix to the value (e.g. px)
                   el.style.setProperty(
                     cssKey,
                     val + knob.getAttribute("suffix")
                   );
                 } else {
+                  // No suffix, just set the value
                   el.style.setProperty(cssKey, val);
                 }
               });
               knob.init();
             }
           }
-          // Attribute Knobs
+          // Attribute Knobs (knob-attr-*)
           if (attrName.startsWith("knob-attr-")) {
             const attrKey = attrName.replace("knob-attr-", "");
             const knob = this.querySelector(`#${attr.value}`);
@@ -164,11 +170,14 @@ export class HTMLElementSandbox extends LitElement {
                 const val = knob.value;
                 if (knob instanceof BooleanKnob) {
                   if (val) {
+                    // <div hidden>
                     el.setAttribute(attrKey, "");
                   } else {
+                    // <div>
                     el.removeAttribute(attrKey);
                   }
                 } else {
+                  // <div value="foo">
                   el.setAttribute(attrKey, val);
                 }
               });
@@ -199,11 +208,14 @@ export class HTMLElementSandbox extends LitElement {
 
   elementToString(node: Element) {
     const sb: string[] = [];
-    sb.push(`<${node.tagName.toLowerCase()}`);
+    const tag = node.tagName.toLowerCase();
+    sb.push(`<${tag}`);
     const attrs = node.attributes;
+    // Add attributes
     for (let i = 0; i < attrs.length; i++) {
       const attr = attrs[i];
       if (attr.name.startsWith("knob-")) continue;
+      // If the attribute is a boolean attribute, add it only if it's true
       if (attr.value === "") {
         sb.push(` ${attr.name}`);
       } else {
@@ -214,20 +226,22 @@ export class HTMLElementSandbox extends LitElement {
     if (node.childNodes.length > 0) {
       for (let i = 0; i < node.childNodes.length; i++) {
         const child = node.childNodes[i];
+        // If the child is a text node, add the content
         if (child instanceof Text) {
           sb.push(child.textContent || "");
         } else if (child instanceof Element) {
+          // If the child is an element, recurse
           sb.push(this.elementToString(child));
         }
       }
     }
-    sb.push(`</${node.tagName.toLowerCase()}>`);
+    sb.push(`</${tag}>`);
     return sb.join("\n");
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    "html-element-sandbox": HTMLElementSandbox;
+    [tagName]: HTMLElementSandbox;
   }
 }

@@ -16,10 +16,6 @@ export class BooleanKnob extends KnobValue<boolean> {
   @property({
     type: Boolean,
     attribute: "value",
-    // converter: {
-    //   fromAttribute: (val: string) => val === "true",
-    //   toAttribute: (val: boolean) => (val ? "true" : "false"),
-    // },
   })
   _value = false;
 
