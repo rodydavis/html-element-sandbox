@@ -20,9 +20,7 @@ export class HTMLElementSandbox extends LitElement {
       display: grid;
       grid-template-areas: "preview" "knobs" "code";
       grid-template-columns: 100%;
-      grid-template-rows: var(--mobile-height) var(--mobile-height) var(
-          --mobile-height
-        );
+      grid-template-rows: var(--mobile-height) auto auto;
       height: 100%;
       width: 100%;
     }
@@ -48,6 +46,12 @@ export class HTMLElementSandbox extends LitElement {
       #preview {
         border-bottom: none;
       }
+      slot[name="knobs"] {
+        overflow-y: auto;
+      }
+      pre {
+        overflow-y: scroll;
+      }
     }
     section {
       flex: 1;
@@ -57,7 +61,6 @@ export class HTMLElementSandbox extends LitElement {
       display: flex;
       flex-direction: column;
       border-left: 1px solid #000;
-      overflow-y: auto;
     }
     slot[name="code"] {
       grid-area: code;
@@ -68,7 +71,6 @@ export class HTMLElementSandbox extends LitElement {
       padding: 16px;
       background-color: #272727;
       color: #c8c8c8;
-      overflow-y: scroll;
     }
     code {
       font-size: 0.8rem;
