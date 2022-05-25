@@ -14,7 +14,6 @@
       knob-css-font-size="text-font-size"
       knob-css-padding="padding"
       knob-css---shadow-color="shadow"
-      knob-attr-contenteditable="content-editable"
     >
       My Button
     </button>
@@ -64,13 +63,6 @@
         value="12"
         suffix="px"
       ></knob-number>
-    </knob-group>
-    <knob-group name="Attributes" expanded>
-      <knob-boolean
-        id="content-editable"
-        name="Content Editable"
-        value="false"
-      ></knob-boolean>
     </knob-group>
   </div>
 </html-element-sandbox>
