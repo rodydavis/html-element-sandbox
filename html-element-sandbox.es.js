@@ -1,10 +1,10 @@
-var __defProp2 = Object.defineProperty;
+var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __spreadValues = (a2, b2) => {
   for (var prop in b2 || (b2 = {}))
     if (__hasOwnProp.call(b2, prop))
@@ -17,6 +17,7 @@ var __spreadValues = (a2, b2) => {
   return a2;
 };
 var __spreadProps = (a2, b2) => __defProps(a2, __getOwnPropDescs(b2));
+import "https://www.unpkg.com/@material/mwc-button@0.26.1/mwc-button.js?module";
 const p$1 = function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -654,15 +655,15 @@ function t(t2) {
  */
 var n;
 ((n = window.HTMLSlotElement) === null || n === void 0 ? void 0 : n.prototype.assignedElements) != null ? (o2, n2) => o2.assignedElements(n2) : (o2, n2) => o2.assignedNodes(n2).filter((o3) => o3.nodeType === Node.ELEMENT_NODE);
-var __defProp$6 = Object.defineProperty;
-var __getOwnPropDesc$6 = Object.getOwnPropertyDescriptor;
-var __decorateClass$6 = (decorators, target, key, kind) => {
-  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$6(target, key) : target;
+var __defProp$7 = Object.defineProperty;
+var __getOwnPropDesc$7 = Object.getOwnPropertyDescriptor;
+var __decorateClass$7 = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$7(target, key) : target;
   for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     if (decorator = decorators[i2])
       result = (kind ? decorator(target, key, result) : decorator(result)) || result;
   if (kind && result)
-    __defProp$6(target, key, result);
+    __defProp$7(target, key, result);
   return result;
 };
 class Knob extends s {
@@ -671,7 +672,7 @@ class Knob extends s {
     this.name = name;
   }
 }
-__decorateClass$6([
+__decorateClass$7([
   e()
 ], Knob.prototype, "name", 2);
 class KnobValue extends Knob {
@@ -726,18 +727,18 @@ KnobValue.styles = r$2`
       flex: 1;
     }
   `;
-var __defProp$5 = Object.defineProperty;
-var __getOwnPropDesc$5 = Object.getOwnPropertyDescriptor;
-var __decorateClass$5 = (decorators, target, key, kind) => {
-  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$5(target, key) : target;
+var __defProp$6 = Object.defineProperty;
+var __getOwnPropDesc$6 = Object.getOwnPropertyDescriptor;
+var __decorateClass$6 = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$6(target, key) : target;
   for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     if (decorator = decorators[i2])
       result = (kind ? decorator(target, key, result) : decorator(result)) || result;
   if (kind && result)
-    __defProp$5(target, key, result);
+    __defProp$6(target, key, result);
   return result;
 };
-const tagName$4 = "knob-boolean";
+const tagName$5 = "knob-boolean";
 let BooleanKnob = class extends KnobValue {
   constructor(name, val) {
     super(name, val);
@@ -756,31 +757,27 @@ let BooleanKnob = class extends KnobValue {
   }
 };
 BooleanKnob.styles = KnobValue.styles;
-__decorateClass$5([
+__decorateClass$6([
   e({
     type: Boolean,
-    attribute: "value",
-    converter: {
-      fromAttribute: (val) => val === "true",
-      toAttribute: (val) => val ? "true" : "false"
-    }
+    attribute: "value"
   })
 ], BooleanKnob.prototype, "_value", 2);
-BooleanKnob = __decorateClass$5([
-  n$1(tagName$4)
+BooleanKnob = __decorateClass$6([
+  n$1(tagName$5)
 ], BooleanKnob);
-var __defProp$4 = Object.defineProperty;
-var __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor;
-var __decorateClass$4 = (decorators, target, key, kind) => {
-  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$4(target, key) : target;
+var __defProp$5 = Object.defineProperty;
+var __getOwnPropDesc$5 = Object.getOwnPropertyDescriptor;
+var __decorateClass$5 = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$5(target, key) : target;
   for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     if (decorator = decorators[i2])
       result = (kind ? decorator(target, key, result) : decorator(result)) || result;
   if (kind && result)
-    __defProp$4(target, key, result);
+    __defProp$5(target, key, result);
   return result;
 };
-const tagName$3 = "knob-string";
+const tagName$4 = "knob-string";
 let StringKnob = class extends KnobValue {
   constructor(name, val) {
     super(name, val);
@@ -799,24 +796,24 @@ let StringKnob = class extends KnobValue {
   }
 };
 StringKnob.styles = KnobValue.styles;
-__decorateClass$4([
+__decorateClass$5([
   e({ type: String, attribute: "value" })
 ], StringKnob.prototype, "_value", 2);
-StringKnob = __decorateClass$4([
-  n$1(tagName$3)
+StringKnob = __decorateClass$5([
+  n$1(tagName$4)
 ], StringKnob);
-var __defProp$3 = Object.defineProperty;
-var __getOwnPropDesc$3 = Object.getOwnPropertyDescriptor;
-var __decorateClass$3 = (decorators, target, key, kind) => {
-  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$3(target, key) : target;
+var __defProp$4 = Object.defineProperty;
+var __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor;
+var __decorateClass$4 = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$4(target, key) : target;
   for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     if (decorator = decorators[i2])
       result = (kind ? decorator(target, key, result) : decorator(result)) || result;
   if (kind && result)
-    __defProp$3(target, key, result);
+    __defProp$4(target, key, result);
   return result;
 };
-const tagName$2 = "knob-number";
+const tagName$3 = "knob-number";
 let NumberKnob = class extends KnobValue {
   constructor(name, val) {
     super(name, val);
@@ -838,7 +835,7 @@ let NumberKnob = class extends KnobValue {
   }
 };
 NumberKnob.styles = KnobValue.styles;
-__decorateClass$3([
+__decorateClass$4([
   e({
     type: Number,
     attribute: "value",
@@ -848,21 +845,21 @@ __decorateClass$3([
     }
   })
 ], NumberKnob.prototype, "_value", 2);
-NumberKnob = __decorateClass$3([
-  n$1(tagName$2)
+NumberKnob = __decorateClass$4([
+  n$1(tagName$3)
 ], NumberKnob);
-var __defProp$2 = Object.defineProperty;
-var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
-var __decorateClass$2 = (decorators, target, key, kind) => {
-  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$2(target, key) : target;
+var __defProp$3 = Object.defineProperty;
+var __getOwnPropDesc$3 = Object.getOwnPropertyDescriptor;
+var __decorateClass$3 = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$3(target, key) : target;
   for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     if (decorator = decorators[i2])
       result = (kind ? decorator(target, key, result) : decorator(result)) || result;
   if (kind && result)
-    __defProp$2(target, key, result);
+    __defProp$3(target, key, result);
   return result;
 };
-const tagName$1 = "knob-color";
+const tagName$2 = "knob-color";
 let ColorKnob = class extends StringKnob {
   buildInput() {
     return $`<input
@@ -880,9 +877,56 @@ let ColorKnob = class extends StringKnob {
     return value;
   }
 };
-ColorKnob = __decorateClass$2([
-  n$1(tagName$1)
+ColorKnob = __decorateClass$3([
+  n$1(tagName$2)
 ], ColorKnob);
+var __defProp$2 = Object.defineProperty;
+var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
+var __decorateClass$2 = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$2(target, key) : target;
+  for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
+    if (decorator = decorators[i2])
+      result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+  if (kind && result)
+    __defProp$2(target, key, result);
+  return result;
+};
+const tagName$1 = "knob-list";
+let ListKnob = class extends KnobValue {
+  constructor(name, val) {
+    super(name, val);
+    this._value = "";
+  }
+  buildInput() {
+    const options = this.getOptions();
+    return $`<select @change=${this.onChange}>
+      ${Array.from(options).map((option) => $`<option
+            value=${option.value}
+            .selected=${this.value === option.value}
+          >
+            ${option.textContent}
+          </option>`)}
+    </select>`;
+  }
+  getOptions() {
+    const options = this.querySelectorAll("option");
+    return Array.from(options);
+  }
+  onChange(e2) {
+    const target = e2.target;
+    this.value = target.value;
+  }
+};
+ListKnob.styles = KnobValue.styles;
+__decorateClass$2([
+  e({
+    type: String,
+    attribute: "value"
+  })
+], ListKnob.prototype, "_value", 2);
+ListKnob = __decorateClass$2([
+  n$1(tagName$1)
+], ListKnob);
 var __defProp$1 = Object.defineProperty;
 var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
 var __decorateClass$1 = (decorators, target, key, kind) => {
@@ -927,7 +971,7 @@ __decorateClass$1([
 GroupKnob = __decorateClass$1([
   n$1(tagName)
 ], GroupKnob);
-var __defProp = Object.defineProperty;
+var __defProp2 = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __decorateClass = (decorators, target, key, kind) => {
   var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
@@ -935,7 +979,7 @@ var __decorateClass = (decorators, target, key, kind) => {
     if (decorator = decorators[i2])
       result = (kind ? decorator(target, key, result) : decorator(result)) || result;
   if (kind && result)
-    __defProp(target, key, result);
+    __defProp2(target, key, result);
   return result;
 };
 let HTMLElementSandbox = class extends s {
@@ -1012,7 +1056,15 @@ let HTMLElementSandbox = class extends s {
             if (knob && knob instanceof KnobValue) {
               knob.addEventListener("value", () => {
                 const val = knob.value;
-                el.setAttribute(attrKey, val);
+                if (knob instanceof BooleanKnob) {
+                  if (val) {
+                    el.setAttribute(attrKey, "");
+                  } else {
+                    el.removeAttribute(attrKey);
+                  }
+                } else {
+                  el.setAttribute(attrKey, val);
+                }
               });
               knob.init();
             }
@@ -1028,7 +1080,10 @@ let HTMLElementSandbox = class extends s {
     if (preview.children.length > 0) {
       const child = preview.children[1];
       if (child && child.children.length > 0) {
-        return this.elementToString(child.children[0]);
+        const lines = this.elementToString(child.children[0]);
+        const linesArray = lines.split("\n");
+        const filteredLines = linesArray.filter((line) => line.trim() !== "");
+        return filteredLines.join("\n");
       }
     }
     return "";
@@ -1107,7 +1162,6 @@ HTMLElementSandbox.styles = r$2`
     }
     slot[name="code"] {
       grid-area: code;
-      overflow-y: auto;
     }
     pre {
       margin: 0;
@@ -1115,6 +1169,7 @@ HTMLElementSandbox.styles = r$2`
       padding: 16px;
       background-color: #272727;
       color: #c8c8c8;
+      overflow-y: scroll;
     }
     code {
       font-size: 0.8rem;
