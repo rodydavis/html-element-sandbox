@@ -202,7 +202,11 @@ export class HTMLElementSandbox extends LitElement {
     for (let i = 0; i < attrs.length; i++) {
       const attr = attrs[i];
       if (attr.name.startsWith("knob-")) continue;
-      sb.push(` ${attr.name}="${attr.value}"`);
+      if (attr.value === "") {
+        sb.push(` ${attr.name}`);
+      } else {
+        sb.push(` ${attr.name}="${attr.value}"`);
+      }
     }
     sb.push(">");
     if (node.childNodes.length > 0) {
