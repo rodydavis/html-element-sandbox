@@ -971,8 +971,8 @@ let HTMLElementSandbox = class extends s {
     if (template) {
       const div = document.createElement("div");
       div.appendChild(template.content.cloneNode(true));
-      div.querySelectorAll("[data-knob-text]").forEach((el) => {
-        const elemId = el.getAttribute("data-knob-text") || "";
+      div.querySelectorAll("[knob-text]").forEach((el) => {
+        const elemId = el.getAttribute("knob-text") || "";
         const knob = this.querySelector(`#${elemId}`);
         if (knob && knob instanceof KnobValue) {
           knob.addEventListener("value", () => {
@@ -991,8 +991,8 @@ let HTMLElementSandbox = class extends s {
         for (let i2 = 0; i2 < attrs.length; i2++) {
           const attr = attrs[i2];
           const attrName = attr.name;
-          if (attrName.startsWith("data-knob-css-")) {
-            const cssKey = attrName.replace("data-knob-css-", "");
+          if (attrName.startsWith("knob-css-")) {
+            const cssKey = attrName.replace("knob-css-", "");
             const knob = this.querySelector(`#${attr.value}`);
             if (knob && knob instanceof KnobValue && el instanceof HTMLElement) {
               knob.addEventListener("value", () => {
@@ -1006,8 +1006,8 @@ let HTMLElementSandbox = class extends s {
               knob.init();
             }
           }
-          if (attrName.startsWith("data-knob-attr-")) {
-            const attrKey = attrName.replace("data-knob-attr-", "");
+          if (attrName.startsWith("knob-attr-")) {
+            const attrKey = attrName.replace("knob-attr-", "");
             const knob = this.querySelector(`#${attr.value}`);
             if (knob && knob instanceof KnobValue) {
               knob.addEventListener("value", () => {
@@ -1039,7 +1039,7 @@ let HTMLElementSandbox = class extends s {
     const attrs = node.attributes;
     for (let i2 = 0; i2 < attrs.length; i2++) {
       const attr = attrs[i2];
-      if (attr.name.startsWith("data-knob-"))
+      if (attr.name.startsWith("knob-"))
         continue;
       sb.push(` ${attr.name}="${attr.value}"`);
     }
@@ -1062,14 +1062,38 @@ HTMLElementSandbox.styles = r$2`
     main {
       --knobs-width: 300px;
       --code-height: calc(100% * 0.4);
+      --mobile-height: 350px;
       display: grid;
-      grid-template-areas:
-        "preview knobs"
-        "code knobs";
-      grid-template-columns: calc(100% - var(--knobs-width)) var(--knobs-width);
-      grid-template-rows: calc(100% - var(--code-height)) var(--code-height);
+      grid-template-areas: "preview" "knobs" "code";
+      grid-template-columns: 100%;
+      grid-template-rows: var(--mobile-height) var(--mobile-height) var(
+          --mobile-height
+        );
       height: 100%;
       width: 100%;
+    }
+    #preview {
+      grid-area: preview;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #272727;
+      background-color: whitesmoke;
+    }
+    @media (min-width: 600px) {
+      main {
+        grid-template-areas:
+          "preview knobs"
+          "code knobs";
+        grid-template-columns: calc(100% - var(--knobs-width)) var(
+            --knobs-width
+          );
+        grid-template-rows: calc(100% - var(--code-height)) var(--code-height);
+      }
+      #preview {
+        border-bottom: none;
+      }
     }
     section {
       flex: 1;
@@ -1095,13 +1119,6 @@ HTMLElementSandbox.styles = r$2`
     code {
       font-size: 0.8rem;
       white-space: pre-wrap;
-    }
-    #preview {
-      grid-area: preview;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
   `;
 __decorateClass([
