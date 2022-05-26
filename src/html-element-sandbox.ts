@@ -208,20 +208,24 @@ export class HTMLElementSandbox extends LitElement {
   elementToString(node: Element) {
     const sb: string[] = [];
     const tag = node.tagName.toLowerCase();
-    sb.push(`<${tag}`);
     const attrs = node.attributes;
     // Add attributes
-    for (let i = 0; i < attrs.length; i++) {
-      const attr = attrs[i];
-      if (attr.name.startsWith("knob-")) continue;
-      // If the attribute is a boolean attribute, add it only if it's true
-      if (attr.value === "") {
-        sb.push(` ${attr.name}`);
-      } else {
-        sb.push(` ${attr.name}="${attr.value}"`);
+    if (attrs.length > 0) {
+      sb.push(`<${tag}`);
+      for (let i = 0; i < attrs.length; i++) {
+        const attr = attrs[i];
+        if (attr.name.startsWith("knob-")) continue;
+        // If the attribute is a boolean attribute, add it only if it's true
+        if (attr.value === "") {
+          sb.push(` ${attr.name}`);
+        } else {
+          sb.push(` ${attr.name}="${attr.value}"`);
+        }
       }
+      sb.push(">");
+    } else {
+      sb.push(`<${tag}>`);
     }
-    sb.push(">");
     if (node.childNodes.length > 0) {
       for (let i = 0; i < node.childNodes.length; i++) {
         const child = node.childNodes[i];
