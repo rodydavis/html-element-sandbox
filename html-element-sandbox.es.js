@@ -1092,19 +1092,23 @@ let HTMLElementSandbox = class extends s {
   elementToString(node) {
     const sb = [];
     const tag = node.tagName.toLowerCase();
-    sb.push(`<${tag}`);
     const attrs = node.attributes;
-    for (let i2 = 0; i2 < attrs.length; i2++) {
-      const attr = attrs[i2];
-      if (attr.name.startsWith("knob-"))
-        continue;
-      if (attr.value === "") {
-        sb.push(` ${attr.name}`);
-      } else {
-        sb.push(` ${attr.name}="${attr.value}"`);
+    if (attrs.length > 0) {
+      sb.push(`<${tag}`);
+      for (let i2 = 0; i2 < attrs.length; i2++) {
+        const attr = attrs[i2];
+        if (attr.name.startsWith("knob-"))
+          continue;
+        if (attr.value === "") {
+          sb.push(` ${attr.name}`);
+        } else {
+          sb.push(` ${attr.name}="${attr.value}"`);
+        }
       }
+      sb.push(">");
+    } else {
+      sb.push(`<${tag}>`);
     }
-    sb.push(">");
     if (node.childNodes.length > 0) {
       for (let i2 = 0; i2 < node.childNodes.length; i2++) {
         const child = node.childNodes[i2];
