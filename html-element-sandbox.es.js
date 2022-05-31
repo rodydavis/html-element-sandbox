@@ -1124,10 +1124,17 @@ let HTMLElementSandbox = class extends s {
   }
 };
 HTMLElementSandbox.styles = r$2`
-    main {
+    :host {
       --knobs-width: 300px;
       --code-height: calc(100% * 0.4);
       --mobile-height: 350px;
+      --preview-background: whitesmoke;
+      --preview-foreground: black;
+      --border: 1px solid #272727;
+      --code-background: #272727;
+      --code-foreground: #c8c8c8;
+    }
+    main {
       display: grid;
       grid-template-areas: "preview" "knobs" "code";
       grid-template-columns: 100%;
@@ -1141,8 +1148,9 @@ HTMLElementSandbox.styles = r$2`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid #272727;
-      background-color: whitesmoke;
+      border-bottom: var(--border);
+      background-color: var(--preview-background);
+      color: var(--preview-foreground);
     }
     @media (min-width: 600px) {
       main {
@@ -1171,7 +1179,7 @@ HTMLElementSandbox.styles = r$2`
       grid-area: knobs;
       display: flex;
       flex-direction: column;
-      border-left: 1px solid #000;
+      border-left: var(--border);
     }
     slot[name="code"] {
       grid-area: code;
@@ -1180,8 +1188,8 @@ HTMLElementSandbox.styles = r$2`
       margin: 0;
       font-family: Monaco, Courier, monospace;
       padding: 16px;
-      background-color: #272727;
-      color: #c8c8c8;
+      background-color: var(--code-background);
+      color: var(--code-foreground);
     }
     code {
       font-size: 0.8rem;
