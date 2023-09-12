@@ -1016,8 +1016,8 @@ let HTMLElementSandbox = class extends s {
     if (template) {
       const div = document.createElement("div");
       div.appendChild(template.content.cloneNode(true));
-      div.querySelectorAll("[knob-text]").forEach((el) => {
-        const elemId = el.getAttribute("knob-text") || "";
+      div.querySelectorAll("[data-knob-text]").forEach((el) => {
+        const elemId = el.getAttribute("data-knob-text") || "";
         const knob = this.querySelector(`#${elemId}`);
         if (knob && knob instanceof KnobValue) {
           knob.addEventListener("value", () => {
@@ -1036,8 +1036,8 @@ let HTMLElementSandbox = class extends s {
         for (let i2 = 0; i2 < attrs.length; i2++) {
           const attr = attrs[i2];
           const attrName = attr.name;
-          if (attrName.startsWith("knob-css-")) {
-            const cssKey = attrName.replace("knob-css-", "");
+          if (attrName.startsWith("data-knob-css-")) {
+            const cssKey = attrName.replace("data-knob-css-", "");
             const knob = this.querySelector(`#${attr.value}`);
             if (knob && knob instanceof KnobValue && el instanceof HTMLElement) {
               knob.addEventListener("value", () => {
@@ -1051,8 +1051,8 @@ let HTMLElementSandbox = class extends s {
               knob.init();
             }
           }
-          if (attrName.startsWith("knob-attr-")) {
-            const attrKey = attrName.replace("knob-attr-", "");
+          if (attrName.startsWith("data-knob-attr-")) {
+            const attrKey = attrName.replace("data-knob-attr-", "");
             const knob = this.querySelector(`#${attr.value}`);
             if (knob && knob instanceof KnobValue) {
               knob.addEventListener("value", () => {
@@ -1097,7 +1097,7 @@ let HTMLElementSandbox = class extends s {
       sb.push(`<${tag}`);
       for (let i2 = 0; i2 < attrs.length; i2++) {
         const attr = attrs[i2];
-        if (attr.name.startsWith("knob-"))
+        if (attr.name.startsWith("data-knob-"))
           continue;
         if (attr.value === "") {
           sb.push(` ${attr.name}`);
