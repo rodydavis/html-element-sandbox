@@ -7,6 +7,7 @@ import "./knobs/number";
 import "./knobs/color";
 import "./knobs/list";
 import "./knobs/group";
+
 import { KnobValue } from "./knobs/base";
 import { BooleanKnob } from "./knobs/boolean";
 
@@ -123,8 +124,8 @@ export class HTMLElementSandbox extends LitElement {
       const div = document.createElement("div");
       div.appendChild(template.content.cloneNode(true));
       // Text Knobs (knob-text)
-      div.querySelectorAll("[knob-text]").forEach((el) => {
-        const elemId = el.getAttribute("knob-text") || "";
+      div.querySelectorAll("[data-knob-text]").forEach((el) => {
+        const elemId = el.getAttribute("data-knob-text") || "";
         const knob = this.querySelector(`#${elemId}`);
         if (knob && knob instanceof KnobValue) {
           knob.addEventListener("value", () => {
@@ -144,8 +145,8 @@ export class HTMLElementSandbox extends LitElement {
           const attr = attrs[i];
           const attrName = attr.name;
           // CSS Knobs (knob-css-*)
-          if (attrName.startsWith("knob-css-")) {
-            const cssKey = attrName.replace("knob-css-", "");
+          if (attrName.startsWith("data-knob-css-")) {
+            const cssKey = attrName.replace("data-knob-css-", "");
             const knob = this.querySelector(`#${attr.value}`);
             if (
               knob &&
@@ -169,8 +170,8 @@ export class HTMLElementSandbox extends LitElement {
             }
           }
           // Attribute Knobs (knob-attr-*)
-          if (attrName.startsWith("knob-attr-")) {
-            const attrKey = attrName.replace("knob-attr-", "");
+          if (attrName.startsWith("data-knob-attr-")) {
+            const attrKey = attrName.replace("data-knob-attr-", "");
             const knob = this.querySelector(`#${attr.value}`);
             if (knob && knob instanceof KnobValue) {
               knob.addEventListener("value", () => {
@@ -222,7 +223,7 @@ export class HTMLElementSandbox extends LitElement {
       sb.push(`<${tag}`);
       for (let i = 0; i < attrs.length; i++) {
         const attr = attrs[i];
-        if (attr.name.startsWith("knob-")) continue;
+        if (attr.name.startsWith("data-knob-")) continue;
         // If the attribute is a boolean attribute, add it only if it's true
         if (attr.value === "") {
           sb.push(` ${attr.name}`);
